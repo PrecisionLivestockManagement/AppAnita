@@ -25,11 +25,11 @@ get_cattlegps <- function(roundedtime, status, username = username, password = p
   pass <- sprintf("mongodb://%s:%s@datamuster-shard-00-00-8mplm.mongodb.net:27017,datamuster-shard-00-01-8mplm.mongodb.net:27017,datamuster-shard-00-02-8mplm.mongodb.net:27017/test?ssl=true&replicaSet=DataMuster-shard-0&authSource=admin", username, password)
   GPS <- mongo(collection = "AnitaGPS", db = "PLMResearch", url = pass, verbose = T)
 
-  # roundedtime <- "2018-10-02 13:00:00"
+  roundedtime <- "2018-10-02 13:00:00"
   roundedtime <- paste(unlist(roundedtime), collapse = '", "')
   roundedtime <- sprintf('"roundedtime":{"$date":"%s"},', strftime(as.POSIXct(paste0(roundedtime)), format="%Y-%m-%dT%H:%M:%OSZ", tz = "GMT"))
 
-  # status <- "preg"
+  status <- "preg"
   status <- paste(unlist(status), collapse = '", "')
   status <- sprintf('"status":{"$in":["%s"]},', status)
 
@@ -38,8 +38,10 @@ get_cattlegps <- function(roundedtime, status, username = username, password = p
   if(nchar(filter)==2){}else{
     filter <- substr(filter, 1 , nchar(filter)-2)
     filter <- paste0(filter, "}")}
-  fields <- sprintf('{"roundedtime":true, "status":true, "Management":true, "lat":true, "long":true, "paddock":true, "_id":false}')
+  fields <- sprintf('{"roundedtime":true, "status":true, "RFID":true, "Management":true, "lat":true, "long":true, "paddock":true, "_id":false}')
   info <- GPS$find(query = filter, fields = fields)
+
+  colnames(info)[4:6] <- c("cowlat", "cowlong", "Paddock")
 
   paddocks1 <- DMApp::appgetpaddocks(property = "Belmont", username = username, password = password)
 
@@ -59,7 +61,7 @@ get_cattlegps <- function(roundedtime, status, username = username, password = p
 
   cattlepaddata <- data.frame(left_join(info, paddocks1, by = "Paddock") %>%
                    filter(Paddock != "xxxxxx"))
-  colnames(cattlepaddata)[7:8] <- c("pdklong", "pdklat")
+  colnames(cattlepaddata)[8:9] <- c("pdklat", "pdklong")
 
   return(cattlepaddata)
 
