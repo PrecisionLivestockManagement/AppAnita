@@ -40,29 +40,27 @@ get_cattlegps <- function(roundedtime, status, username = username, password = p
     filter <- paste0(filter, "}")}
   fields <- sprintf('{"roundedtime":true, "status":true, "Management":true, "lat":true, "long":true, "paddock":true, "_id":false}')
   info <- GPS$find(query = filter, fields = fields)
-  colnames(info)[c(3:5)] <- c("cowlat", "cowlong", "Paddock")
-  names(info)[5] <- "Paddock"
 
-  paddocks1 <- DMApp::appgetpaddocks(property = "Belmont", username = username, password = password)
+  # paddocks1 <- DMApp::appgetpaddocks(property = "Belmont", username = username, password = password)
+  #
+  # for(i in 1:nrow(paddocks1@data)){
+  #
+  #   lat <- paddocks1@polygons[[i]]@labpt[1]
+  #   long <- paddocks1@polygons[[i]]@labpt[2]
+  #
+  #   paddocks1$lat[i] <- paddocks1@polygons[[i]]@labpt[1]
+  #   paddocks1$long[i] <- paddocks1@polygons[[i]]@labpt[2]
+  #
+  # }
+  #
+  # paddocks1 <- data.frame(paddocks1 %>%
+  #              select(paddname, lat, long)) %>%
+  #              rename(Paddock = paddname)
+  #
+  # cattlepaddata <- data.frame(left_join(info, paddocks1, by = "Paddock") %>%
+  #                  filter(Paddock != "xxxxxx"))
+  # colnames(cattlepaddata)[7:8] <- c("pdklong", "pdklat")
 
-  for(i in 1:nrow(paddocks1@data)){
-
-    lat <- paddocks1@polygons[[i]]@labpt[1]
-    long <- paddocks1@polygons[[i]]@labpt[2]
-
-    paddocks1$lat[i] <- paddocks1@polygons[[i]]@labpt[1]
-    paddocks1$long[i] <- paddocks1@polygons[[i]]@labpt[2]
-
-  }
-
-  paddocks1 <- data.frame(paddocks1 %>%
-               select(paddname, lat, long)) %>%
-               rename(Paddock = paddname)
-
-  cattlepaddata <- data.frame(left_join(info, paddocks1, by = "Paddock") %>%
-                   filter(Paddock != "xxxxxx"))
-  colnames(cattlepaddata)[7:8] <- c("pdklong", "pdklat")
-
-  return(cattlepaddata)
+  return(info)
 
 }
