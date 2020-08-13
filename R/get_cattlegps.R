@@ -25,11 +25,11 @@ get_cattlegps <- function(roundedtime, status, username = username, password = p
   pass <- sprintf("mongodb://%s:%s@datamuster-shard-00-00-8mplm.mongodb.net:27017,datamuster-shard-00-01-8mplm.mongodb.net:27017,datamuster-shard-00-02-8mplm.mongodb.net:27017/test?ssl=true&replicaSet=DataMuster-shard-0&authSource=admin", username, password)
   GPS <- mongo(collection = "AnitaGPS", db = "PLMResearch", url = pass, verbose = T)
 
-  roundedtime <- "2018-10-02 13:00:00"
+  # roundedtime <- "2018-10-02 13:00:00"
   roundedtime <- paste(unlist(roundedtime), collapse = '", "')
   roundedtime <- sprintf('"roundedtime":{"$date":"%s"},', strftime(as.POSIXct(paste0(roundedtime)), format="%Y-%m-%dT%H:%M:%OSZ", tz = "GMT"))
 
-  status <- "preg"
+  # status <- "preg"
   status <- paste(unlist(status), collapse = '", "')
   status <- sprintf('"status":{"$in":["%s"]},', status)
 
