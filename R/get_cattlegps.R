@@ -25,11 +25,11 @@ get_cattlegps <- function(roundedtime, status, username = username, password = p
   pass <- sprintf("mongodb://%s:%s@datamuster-shard-00-00-8mplm.mongodb.net:27017,datamuster-shard-00-01-8mplm.mongodb.net:27017,datamuster-shard-00-02-8mplm.mongodb.net:27017/test?ssl=true&replicaSet=DataMuster-shard-0&authSource=admin", username, password)
   GPS <- mongo(collection = "AnitaGPS", db = "PLMResearch", url = pass, verbose = T)
 
-  roundedtime <- "2018-10-02 13:00:00"
+  # roundedtime <- "2018-10-02 13:00:00"
   roundedtime <- paste(unlist(roundedtime), collapse = '", "')
   roundedtime <- sprintf('"roundedtime":{"$date":"%s"},', strftime(as.POSIXct(paste0(roundedtime)), format="%Y-%m-%dT%H:%M:%OSZ", tz = "GMT"))
 
-  status <- "preg"
+  # status <- "preg"
   status <- paste(unlist(status), collapse = '", "')
   status <- sprintf('"status":{"$in":["%s"]},', status)
 
@@ -41,26 +41,26 @@ get_cattlegps <- function(roundedtime, status, username = username, password = p
   fields <- sprintf('{"roundedtime":true, "status":true, "Management":true, "lat":true, "long":true, "paddock":true, "_id":false}')
   info <- GPS$find(query = filter, fields = fields)
 
-  # paddocks1 <- DMApp::appgetpaddocks(property = "Belmont", username = username, password = password)
-  #
-  # for(i in 1:nrow(paddocks1@data)){
-  #
-  #   lat <- paddocks1@polygons[[i]]@labpt[1]
-  #   long <- paddocks1@polygons[[i]]@labpt[2]
-  #
-  #   paddocks1$lat[i] <- paddocks1@polygons[[i]]@labpt[1]
-  #   paddocks1$long[i] <- paddocks1@polygons[[i]]@labpt[2]
-  #
-  # }
-  #
-  # paddocks1 <- data.frame(paddocks1 %>%
-  #              select(paddname, lat, long)) %>%
-  #              rename(Paddock = paddname)
-  #
-  # cattlepaddata <- data.frame(left_join(info, paddocks1, by = "Paddock") %>%
-  #                  filter(Paddock != "xxxxxx"))
-  # colnames(cattlepaddata)[7:8] <- c("pdklong", "pdklat")
+  paddocks1 <- DMApp::appgetpaddocks(property = "Belmont", username = username, password = password)
 
-  return(info)
+  for(i in 1:nrow(paddocks1@data)){
+
+    lat <- paddocks1@polygons[[i]]@labpt[1]
+    long <- paddocks1@polygons[[i]]@labpt[2]
+
+    paddocks1$lat[i] <- paddocks1@polygons[[i]]@labpt[1]
+    paddocks1$long[i] <- paddocks1@polygons[[i]]@labpt[2]
+
+  }
+
+  paddocks1 <- data.frame(paddocks1 %>%
+               select(paddname, lat, long)) %>%
+               rename(Paddock = paddname)
+
+  cattlepaddata <- data.frame(left_join(info, paddocks1, by = "Paddock") %>%
+                   filter(Paddock != "xxxxxx"))
+  colnames(cattlepaddata)[7:8] <- c("pdklong", "pdklat")
+
+  return(cattlepaddata)
 
 }
