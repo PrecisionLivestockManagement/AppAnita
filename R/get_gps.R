@@ -1,7 +1,7 @@
 #' Retrieves GPS data from the AnitaGPS collection in the PLMResearch database.
 #'
 #' This function retrieves GPS data from Anita's Belmont trial to the MongoDB database.
-#' @name get_cattlespatial
+#' @name get_gps
 #' @param timestamp a list of timestamps
 #' @param status the status of the cow
 #' @param username username for use with Anita's App
@@ -14,7 +14,7 @@
 #' @export
 
 
-get_cattlespatial <- function(roundedtime, status, username = username, password = password){
+get_gps <- function(roundedtime, status, username = username, password = password){
 
   username = keyring::key_list("DMMongoDB")[1,2]
   password =  keyring::key_get("DMMongoDB", username)
