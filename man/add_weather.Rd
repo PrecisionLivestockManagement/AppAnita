@@ -4,7 +4,16 @@
 \alias{add_weather}
 \title{Add weather data to the AnitaWeather collection in the PLMResearch database.}
 \usage{
-add_weather(timestamp, rain, temp, humidity, THI, username, password)
+add_weather(
+  timestamp,
+  rain,
+  temp,
+  humidity,
+  THI,
+  condition,
+  username,
+  password
+)
 }
 \arguments{
 \item{timestamp}{a list of timestamps for weather}
@@ -16,6 +25,8 @@ add_weather(timestamp, rain, temp, humidity, THI, username, password)
 \item{humidity}{the humidity (H)}
 
 \item{THI}{the temperature-humidity index. Calculated as: 0.8×T+H×(T-14.4)+46.4}
+
+\item{condition}{the weather conditions}
 
 \item{username}{username for use with Anita's App}
 

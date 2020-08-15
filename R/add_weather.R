@@ -7,6 +7,7 @@
 #' @param temp the temperature (T)
 #' @param humidity the humidity (H)
 #' @param THI the temperature-humidity index. Calculated as: 0.8×T+H×(T-14.4)+46.4
+#' @param condition the weather conditions
 #' @param username username for use with Anita's App
 #' @param password password for use with Anita's App
 #' @return a message that indicates the data has been successfully added
@@ -15,7 +16,7 @@
 #' @export
 
 
-add_weather <- function(timestamp, rain, temp, humidity, THI, username, password){
+add_weather <- function(timestamp, rain, temp, humidity, THI, condition, username, password){
 
   username = keyring::key_list("DMMongoDB")[1,2]
   password =  keyring::key_get("DMMongoDB", username)
@@ -24,8 +25,8 @@ add_weather <- function(timestamp, rain, temp, humidity, THI, username, password
   weather <- mongo(collection = "AnitaWeather", db = "PLMResearch", url = pass, verbose = T)
 
   weatherdata <- sprintf(
-    '{"timestamp":{"$date":"%s"}, "rain":%s, "temperature":%s, "humidity":%s, "THI":%s}',
-    paste0(substr(timestamp,1,10),"T",substr(timestamp,12,19),"+1000"), rain, temp, humidity, THI)
+    '{"timestamp":{"$date":"%s"}, "rain":%s, "temperature":%s, "humidity":%s, "THI":%s, "condition":"%s"}',
+    paste0(substr(timestamp,1,10),"T",substr(timestamp,12,19),"+1000"), rain, temp, humidity, THI, condition)
 
   weather$insert(weatherdata)
 }

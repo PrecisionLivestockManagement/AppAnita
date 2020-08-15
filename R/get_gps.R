@@ -14,7 +14,7 @@
 #' @export
 
 
-get_gps <- function(roundedtime, status, username = username, password = password){
+get_gps <- function(roundedtime, status, username, password){
 
   username = keyring::key_list("DMMongoDB")[1,2]
   password =  keyring::key_get("DMMongoDB", username)

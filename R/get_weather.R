@@ -13,7 +13,7 @@
 #' @export
 
 
-get_weather <- function(timestamp, username = username, password = password){
+get_weather <- function(timestamp, username, password){
 
   username = keyring::key_list("DMMongoDB")[1,2]
   password =  keyring::key_get("DMMongoDB", username)
@@ -28,7 +28,7 @@ get_weather <- function(timestamp, username = username, password = password){
   if(nchar(filter)==2){}else{
     filter <- substr(filter, 1 , nchar(filter)-2)
     filter <- paste0(filter, "}")}
-  fields <- sprintf('{"timestamp":true, "rain":true, "temperature":true, "humidity":true, "THI":true, "_id":false}')
+  fields <- sprintf('{"timestamp":true, "rain":true, "temperature":true, "humidity":true, "THI":true, "condition":true, "_id":false}')
   info <- weather$find(query = filter, fields = fields)
 
   return(info)
