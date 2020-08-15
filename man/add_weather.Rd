@@ -2,36 +2,24 @@
 % Please edit documentation in R/add_weather.R
 \name{add_weather}
 \alias{add_weather}
-\title{Add GPS data}
+\title{Add weather data to the AnitaWeather collection in the PLMResearch database.}
 \usage{
 add_weather(timestamp, rain, temp, humidity, THI, username, password)
 }
 \arguments{
-\item{timestamp}{a list of cattle timestamp of a coordinate point}
+\item{timestamp}{a list of timestamps for weather}
 
-\item{username}{if you don't have a username set up using the dmaccess function you can pass a username, if no value added then the function looks for a value from dmaccess via keyring}
+\item{rain}{the precipitation}
 
-\item{password}{if you include a username you will also need to add a password contact Lauren O'Connor if you don't have access}
+\item{temp}{the temperature (T)}
 
-\item{RFID}{a list of cattle RFID number/s}
+\item{humidity}{the humidity (H)}
 
-\item{mtag}{a list of cattle management tag number/s}
+\item{THI}{the temperature-humidity index. Calculated as: 0.8×T+H×(T-14.4)+46.4}
 
-\item{calvingdate}{a list of cattle calving dates}
+\item{username}{username for use with Anita's App}
 
-\item{roundedtime}{a list of cattle timestamps, rounded to the closest 5 minutes}
-
-\item{lat}{the latitude of a coordinate point}
-
-\item{long}{the longitude of a coordinate point}
-
-\item{proximity}{the proximity to the closest neighbour}
-
-\item{neighbour}{the closest neighbouring cow}
-
-\item{paddock}{the paddock that the cattle are in}
-
-\item{status}{the calving status of the cow}
+\item{password}{password for use with Anita's App}
 }
 \value{
 a message that indicates the data has been successfully added

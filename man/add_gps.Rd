@@ -2,7 +2,7 @@
 % Please edit documentation in R/add_gps.R
 \name{add_gps}
 \alias{add_gps}
-\title{Add GPS data}
+\title{Add GPS data to the AnitaGPS collection in the PLMResearch database.}
 \usage{
 add_gps(
   RFID,
@@ -27,7 +27,7 @@ add_gps(
 
 \item{calvingdate}{a list of cattle calving dates}
 
-\item{timestamp}{a list of cattle timestamp of a coordinate point}
+\item{timestamp}{a list of cattle timestamps of a coordinate point}
 
 \item{roundedtime}{a list of cattle timestamps, rounded to the closest 5 minutes}
 
@@ -43,9 +43,9 @@ add_gps(
 
 \item{status}{the calving status of the cow}
 
-\item{username}{if you don't have a username set up using the dmaccess function you can pass a username, if no value added then the function looks for a value from dmaccess via keyring}
+\item{username}{username for use with Anita's App}
 
-\item{password}{if you include a username you will also need to add a password contact Lauren O'Connor if you don't have access}
+\item{password}{password for use with Anita's App}
 }
 \value{
 a message that indicates the data has been successfully added

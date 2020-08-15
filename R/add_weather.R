@@ -1,20 +1,14 @@
-#' Add GPS data
+#' Add weather data to the AnitaWeather collection in the PLMResearch database.
 #'
 #' This function adds GPS data from Anita's Belmont trial to the MongoDB database.
 #' @name add_weather
-#' @param RFID a list of cattle RFID number/s
-#' @param mtag a list of cattle management tag number/s
-#' @param calvingdate a list of cattle calving dates
-#' @param timestamp a list of cattle timestamp of a coordinate point
-#' @param roundedtime a list of cattle timestamps, rounded to the closest 5 minutes
-#' @param lat the latitude of a coordinate point
-#' @param long the longitude of a coordinate point
-#' @param proximity the proximity to the closest neighbour
-#' @param neighbour the closest neighbouring cow
-#' @param paddock the paddock that the cattle are in
-#' @param status the calving status of the cow
-#' @param username if you don't have a username set up using the dmaccess function you can pass a username, if no value added then the function looks for a value from dmaccess via keyring
-#' @param password if you include a username you will also need to add a password contact Lauren O'Connor if you don't have access
+#' @param timestamp a list of timestamps for weather
+#' @param rain the precipitation
+#' @param temp the temperature (T)
+#' @param humidity the humidity (H)
+#' @param THI the temperature-humidity index. Calculated as: 0.8×T+H×(T-14.4)+46.4
+#' @param username username for use with Anita's App
+#' @param password password for use with Anita's App
 #' @return a message that indicates the data has been successfully added
 #' @author Anita Chang \email{a.chang@@cqu.edu.au}
 #' @import mongolite

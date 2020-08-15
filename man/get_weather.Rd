@@ -2,31 +2,23 @@
 % Please edit documentation in R/get_weather.R
 \name{get_weather}
 \alias{get_weather}
-\title{Retrieves cattle from the DataMuster database}
+\title{Retrieves weather data from the AnitaWeather collection in the PLMResearch database.}
 \usage{
 get_weather(timestamp, username = username, password = password)
 }
 \arguments{
-\item{username}{a username to access the DataMuster database}
+\item{timestamp}{a list of timestamps}
 
-\item{password}{a password to access the DataMuster database}
+\item{username}{username for use with Anita's App}
 
-\item{property}{the name of the property to search the database}
-
-\item{sex}{the sex of the cattle to be returned, determined by the "Males or Females" filter}
-
-\item{category}{the category of cattle to be returned, determined by the "Breeders or Growers" filter}
-
-\item{zoom}{indicates whether to return cattle from the whole property or to filter cattle by paddock, determined by the "Paddock Groups" filter}
-
-\item{paddock}{the paddock allocation of the cattle to be returned, determined by selecting a paddock on the map}
+\item{password}{password for use with Anita's App}
 }
 \value{
-a dataframe with a list of cattle numbers by paddock
+returns the paddock spatial information
 }
 \description{
-This function retreives a list of cattle, their paddock allocations and spatial coordinates for display on the property map on the DataMuster website
+This function retrieves weather data from Anita's Belmont trial to the MongoDB database.
 }
 \author{
-Dave Swain \email{d.swain@cqu.edu.au} and Lauren O'Connor \email{l.r.oconnor@cqu.edu.au}
+Anita Chang \email{a.chang@cqu.edu.au}
 }
