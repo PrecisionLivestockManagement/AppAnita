@@ -4,7 +4,7 @@
 \alias{get_gps}
 \title{Retrieves GPS data from the AnitaGPS collection in the PLMResearch database.}
 \usage{
-get_gps(roundedtime, status, username, password)
+get_gps(roundedtime, status = NULL, username = user, password = pass)
 }
 \arguments{
 \item{status}{the status of the cow}

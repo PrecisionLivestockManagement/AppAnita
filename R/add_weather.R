@@ -1,6 +1,6 @@
 #' Add weather data to the AnitaWeather collection in the PLMResearch database.
 #'
-#' This function adds GPS data from Anita's Belmont trial to the MongoDB database.
+#' This function adds weather data from Anita's Belmont trial to the MongoDB database.
 #' @name add_weather
 #' @param timestamp a list of timestamps for weather
 #' @param rain the precipitation
@@ -16,10 +16,11 @@
 #' @export
 
 
-add_weather <- function(timestamp, rain, temp, humidity, THI, condition, username, password){
+add_weather <- function(timestamp, rain, temp, humidity, THI, condition, username = user, password = pass){
 
-  username = keyring::key_list("DMMongoDB")[1,2]
-  password =  keyring::key_get("DMMongoDB", username)
+  if(is.null(username)||is.null(password)){
+    username = keyring::key_list("DMMongoDB")[1,2]
+    password =  keyring::key_get("DMMongoDB", username)}
 
   pass <- sprintf("mongodb://%s:%s@datamuster-shard-00-00-8mplm.mongodb.net:27017,datamuster-shard-00-01-8mplm.mongodb.net:27017,datamuster-shard-00-02-8mplm.mongodb.net:27017/test?ssl=true&replicaSet=DataMuster-shard-0&authSource=admin", username, password)
   weather <- mongo(collection = "AnitaWeather", db = "PLMResearch", url = pass, verbose = T)

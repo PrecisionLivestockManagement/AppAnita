@@ -11,8 +11,8 @@ add_weather(
   humidity,
   THI,
   condition,
-  username,
-  password
+  username = user,
+  password = pass
 )
 }
 \arguments{
@@ -36,7 +36,7 @@ add_weather(
 a message that indicates the data has been successfully added
 }
 \description{
-This function adds GPS data from Anita's Belmont trial to the MongoDB database.
+This function adds weather data from Anita's Belmont trial to the MongoDB database.
 }
 \author{
 Anita Chang \email{a.chang@cqu.edu.au}
