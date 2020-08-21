@@ -4,14 +4,16 @@
 \alias{get_cattle}
 \title{Retrieves cattle data from the AnitaGPS collection in the PLMResearch database.}
 \usage{
-get_cattle(date, username = NULL, password = NULL)
+get_cattle(timestamp, status = NULL, username = NULL, password = NULL)
 }
 \arguments{
+\item{timestamp}{a list of timestamps}
+
+\item{status}{a list of cattle statuses to search for}
+
 \item{username}{username for use with Anita's App}
 
 \item{password}{password for use with Anita's App}
-
-\item{timestamp}{a list of timestamps}
 }
 \value{
 returns the cattle spatial information
