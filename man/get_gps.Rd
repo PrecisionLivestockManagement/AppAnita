@@ -4,16 +4,16 @@
 \alias{get_gps}
 \title{Retrieves GPS data from the AnitaGPS collection in the PLMResearch database.}
 \usage{
-get_gps(roundedtime, status = NULL, username = user, password = pass)
+get_gps(timestamp = NULL, status = NULL, username = NULL, password = NULL)
 }
 \arguments{
-\item{status}{the status of the cow}
+\item{timestamp}{a list of timestamps}
+
+\item{status}{a list of cattle statuses to search for}
 
 \item{username}{username for use with Anita's App}
 
 \item{password}{password for use with Anita's App}
-
-\item{timestamp}{a list of timestamps}
 }
 \value{
 returns the cattle spatial information

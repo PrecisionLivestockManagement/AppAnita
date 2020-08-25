@@ -4,7 +4,7 @@
 \alias{get_weather}
 \title{Retrieves weather data from the AnitaWeather collection in the PLMResearch database.}
 \usage{
-get_weather(timestamp, username = user, password = pass)
+get_weather(timestamp = NULL, username = NULL, password = NULL)
 }
 \arguments{
 \item{timestamp}{a list of timestamps}

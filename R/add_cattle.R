@@ -30,9 +30,5 @@ add_cattle <- function(RFID, mtag, calvingdate, paddock, date, hour, status, use
     '{"RFID":"%s", "Management":"%s", "calvingdate":"%s", "paddock":"%s", "date":"%s", "hour":{"$date":"%s"}, "status":"%s"}',
     RFID, mtag, calvingdate, paddock, date, paste0(substr(hour,1,10),"T",substr(hour,12,19),"+1000"), status)
 
-  # cattledata <- sprintf(
-  #   '{"RFID":"%s", "Management":"%s", "calvingdate":"%s", "paddock":"%s", "date":"%s", hour":{"$date":"%s"}}',
-  #   RFID, mtag, calvingdate, paddock, date, paste0(substr(hour,1,10),"T",substr(hour,12,19),"+1000"))
-
   cattle$insert(cattledata)
 }

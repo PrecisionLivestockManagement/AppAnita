@@ -13,7 +13,7 @@
 #' @export
 
 
-get_weather <- function(timestamp, username = user, password = pass){
+get_weather <- function(timestamp = NULL, username = NULL, password = NULL){
 
   if(is.null(username)||is.null(password)){
     username = keyring::key_list("DMMongoDB")[1,2]
@@ -22,10 +22,15 @@ get_weather <- function(timestamp, username = user, password = pass){
   pass <- sprintf("mongodb://%s:%s@datamuster-shard-00-00-8mplm.mongodb.net:27017,datamuster-shard-00-01-8mplm.mongodb.net:27017,datamuster-shard-00-02-8mplm.mongodb.net:27017/test?ssl=true&replicaSet=DataMuster-shard-0&authSource=admin", username, password)
   weather <- mongo(collection = "AnitaWeather", db = "PLMResearch", url = pass, verbose = T)
 
-  timestamp <- paste(unlist(timestamp), collapse = '", "')
-  timestamp <- sprintf('"timestamp":{"$date":"%s"},', strftime(as.POSIXct(paste0(timestamp)), format="%Y-%m-%dT%H:%M:%OSZ", tz = "GMT"))
+  if(is.null(timestamp)){
+    filter <- paste0("{" ,"}")
+  } else {
+    timestamp <- paste(unlist(timestamp), collapse = '", "')
+    timestamp <- sprintf('"timestamp":{"$date":"%s"},', strftime(as.POSIXct(paste0(timestamp)), format="%Y-%m-%dT%H:%M:%OSZ", tz = "GMT"))
 
-  filter <- paste0("{", timestamp,"}")
+    filter <- paste0("{", timestamp,"}")
+  }
+
   if(nchar(filter)==2){}else{
     filter <- substr(filter, 1 , nchar(filter)-2)
     filter <- paste0(filter, "}")}
