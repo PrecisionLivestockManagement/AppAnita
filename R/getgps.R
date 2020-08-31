@@ -23,7 +23,7 @@ getgps <- function(timestamp = NULL, status = NULL, username = NULL, password = 
   pass <- sprintf("mongodb://%s:%s@datamuster-shard-00-00-8mplm.mongodb.net:27017,datamuster-shard-00-01-8mplm.mongodb.net:27017,datamuster-shard-00-02-8mplm.mongodb.net:27017/test?ssl=true&replicaSet=DataMuster-shard-0&authSource=admin", username, password)
   GPS <- mongo(collection = "AnitaGPS", db = "PLMResearch", url = pass, verbose = T)
 
-  if(is.null(status)){status = c("preg", "calving", "dystocia", "with calf", "dead calf")}
+  if(is.null(status)){status = c("Pregnant cow", "Calving cow", "Dystocia", "Cow with calf", "Cow without calf")}
   status <- paste(unlist(status), collapse = '", "')
   status <- sprintf('"status":{"$in":["%s"]},', status)
 
