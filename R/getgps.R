@@ -39,7 +39,8 @@ getgps <- function(timestamp = NULL, status = NULL, username = NULL, password = 
   if(nchar(filter)==2){}else{
     filter <- substr(filter, 1 , nchar(filter)-2)
     filter <- paste0(filter, "}")}
-  fields <- sprintf('{"timestamp":true, "roundedtime":true, "status":true, "RFID":true, "Management":true, "lat":true, "long":true, "paddock":true, "_id":false}')
+  fields <- sprintf('{"RFID":true, "management":true, "date":true, "hour":true, "roundedtime":true, "timestamp":true, "latitude":true, "longitude":true, "status":true,
+                    "_id":false}')
   info <- GPS$find(query = filter, fields = fields)
 
   return(info)
