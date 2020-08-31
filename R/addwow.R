@@ -1,7 +1,7 @@
-#' Add weather data to the AnitaWeather collection in the PLMResearch database.
+#' Add walk over weigh data to the AnitaWoW collection in the PLMResearch database.
 #'
 #' This function adds weather data from Anita's Belmont trial to the MongoDB database.
-#' @name add_weather
+#' @name addwow
 #' @param timestamp a list of timestamps for weather
 #' @param rain the precipitation
 #' @param temp the temperature (T)
@@ -16,18 +16,20 @@
 #' @export
 
 
-add_weather <- function(timestamp, rain, temp, humidity, THI, condition, username = user, password = pass){
+addwow <- function(RFID, mtag, date, hour, roundedtime, timestamp, weight, status, username = NULL, password = NULL){
 
   if(is.null(username)||is.null(password)){
     username = keyring::key_list("DMMongoDB")[1,2]
     password =  keyring::key_get("DMMongoDB", username)}
 
   pass <- sprintf("mongodb://%s:%s@datamuster-shard-00-00-8mplm.mongodb.net:27017,datamuster-shard-00-01-8mplm.mongodb.net:27017,datamuster-shard-00-02-8mplm.mongodb.net:27017/test?ssl=true&replicaSet=DataMuster-shard-0&authSource=admin", username, password)
-  weather <- mongo(collection = "AnitaWeather", db = "PLMResearch", url = pass, verbose = T)
+  wow <- mongo(collection = "AnitaWoW", db = "PLMResearch", url = pass, verbose = T)
 
-  weatherdata <- sprintf(
-    '{"timestamp":{"$date":"%s"}, "rain":%s, "temperature":%s, "humidity":%s, "THI":%s, "condition":"%s"}',
-    paste0(substr(timestamp,1,10),"T",substr(timestamp,12,19),"+1000"), rain, temp, humidity, THI, condition)
+  wowdata <- sprintf(
+    '{"RFID":"%s", "management":"%s", "date":"%s", "hour":{"$date":"%s"}, "roundedtime":{"$date":"%s"}, "timestamp":{"$date":"%s"},
+    "weight":%s, "status":"%s"}',
+    RFID, mtag, date, paste0(substr(hour,1,10),"T",substr(hour,12,19),"+1000"), paste0(substr(roundedtime,1,10),"T",substr(roundedtime,12,19),"+1000"),
+    paste0(substr(timestamp,1,10),"T",substr(timestamp,12,19),"+1000"), weight, status)
 
-  weather$insert(weatherdata)
+  wow$insert(wowdata)
 }

@@ -1,7 +1,7 @@
 #' Add paddock data to the AnitaPaddocks collection in the PLMResearch database.
 #'
 #' This function adds paddock data from Anita's Belmont trial to the MongoDB database.
-#' @name add_paddocks
+#' @name addpaddocks
 #' @param paddname the name of the paddock
 #' @param hectares the hectares of the paddock
 #' @param cattle the number of cattle in the paddock
@@ -13,7 +13,7 @@
 #' @export
 
 
-add_paddocks <- function(paddname, hectares, cattle, username = user, password = pass){
+addpaddocks <- function(paddname, hectares, cattle, username = NULL, password = NULL){
 
   if(is.null(username)||is.null(password)){
     username = keyring::key_list("DMMongoDB")[1,2]

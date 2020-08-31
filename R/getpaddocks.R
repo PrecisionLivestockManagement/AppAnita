@@ -1,7 +1,7 @@
 #' Retrieves paddock data from the AnitaPaddocks collection in the PLMResearch database.
 #'
 #' This function retrieves paddock data from Anita's Belmont trial to the MongoDB database.
-#' @name get_paddocks
+#' @name getpaddocks
 #' @param username username for use with Anita's App
 #' @param password password for use with Anita's App
 #' @return returns the paddock spatial information
@@ -12,7 +12,7 @@
 #' @export
 
 
-get_paddocks <- function(username = NULL, password = NULL){
+getpaddocks <- function(username = NULL, password = NULL){
 
   if(is.null(username)||is.null(password)){
     username = keyring::key_list("DMMongoDB")[1,2]
