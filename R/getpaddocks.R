@@ -12,7 +12,7 @@
 #' @export
 
 
-getpaddocks <- function(username = NULL, password = NULL){
+getpaddocks <- function(username = user, password = pass){
 
   if(is.null(username)||is.null(password)){
     username = keyring::key_list("DMMongoDB")[1,2]

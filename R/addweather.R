@@ -16,7 +16,7 @@
 #' @export
 
 
-addweather <- function(timestamp, rain, temp, humidity, THI, condition, username = NULL, password = NULL){
+addweather <- function(timestamp, rain, temp, humidity, THI, condition, username = user, password = pass){
 
   if(is.null(username)||is.null(password)){
     username = keyring::key_list("DMMongoDB")[1,2]

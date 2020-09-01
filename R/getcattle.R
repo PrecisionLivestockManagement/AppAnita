@@ -14,7 +14,7 @@
 #' @export
 
 
-getcattle <- function(timestamp = NULL, status = NULL, username = NULL, password = NULL){
+getcattle <- function(timestamp = NULL, status = NULL, username = user, password = pass){
 
   if(is.null(username)||is.null(password)){
     username = keyring::key_list("DMMongoDB")[1,2]

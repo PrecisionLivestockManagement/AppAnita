@@ -18,7 +18,7 @@
 #' @export
 
 
-addcattle <- function(RFID, mtag, calvingdate, calving, paddock, date, hour, status, username = NULL, password = NULL){
+addcattle <- function(RFID, mtag, calvingdate, calving, paddock, date, hour, status, username = user, password = pass){
   if(is.null(username)||is.null(password)){
     username = keyring::key_list("DMMongoDB")[1,2]
     password =  keyring::key_get("DMMongoDB", username)}

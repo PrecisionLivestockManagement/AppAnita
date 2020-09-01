@@ -16,7 +16,7 @@
 #' @export
 
 
-addwow <- function(RFID, mtag, date, hour, roundedtime, timestamp, weight, status, username = NULL, password = NULL){
+addwow <- function(RFID, mtag, date, hour, roundedtime, timestamp, weight, status, username = user, password = pass){
 
   if(is.null(username)||is.null(password)){
     username = keyring::key_list("DMMongoDB")[1,2]

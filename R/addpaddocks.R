@@ -13,7 +13,7 @@
 #' @export
 
 
-addpaddocks <- function(paddname, hectares, cattle, username = NULL, password = NULL){
+addpaddocks <- function(paddname, hectares, cattle, username = user, password = pass){
 
   if(is.null(username)||is.null(password)){
     username = keyring::key_list("DMMongoDB")[1,2]

@@ -19,7 +19,7 @@
 #' @export
 
 
-addgps <- function(RFID, mtag, date, hour, roundedtime, timestamp, latitude, longitude, status, username = NULL, password = NULL){
+addgps <- function(RFID, mtag, date, hour, roundedtime, timestamp, latitude, longitude, status, username = user, password = pass){
 
   if(is.null(username)||is.null(password)){
     username = keyring::key_list("DMMongoDB")[1,2]

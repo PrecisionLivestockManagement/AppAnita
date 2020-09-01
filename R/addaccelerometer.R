@@ -21,7 +21,7 @@
 #' @export
 
 
-addaccelerometer <- function(RFID, mtag, date, hour, roundedtime, timestamp, X, Y, Z, status, username = NULL, password = NULL){
+addaccelerometer <- function(RFID, mtag, date, hour, roundedtime, timestamp, X, Y, Z, status, username = user, password = pass){
 
   if(is.null(username)||is.null(password)){
     username = keyring::key_list("DMMongoDB")[1,2]
