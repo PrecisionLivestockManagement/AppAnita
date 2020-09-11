@@ -21,7 +21,6 @@ getcalvingmodel <- function(hour, username = user, password = pass){
   pass <- sprintf("mongodb://%s:%s@datamuster-shard-00-00-8mplm.mongodb.net:27017,datamuster-shard-00-01-8mplm.mongodb.net:27017,datamuster-shard-00-02-8mplm.mongodb.net:27017/test?ssl=true&replicaSet=DataMuster-shard-0&authSource=admin", username, password)
   calvmod <- mongo(collection = "AnitaCalvingModelData", db = "PLMResearch", url = pass, verbose = T)
 
-  hour <- "2018-10-16 13:00:00"
   hour <- paste(unlist(hour), collapse = '", "')
   hour <- sprintf('"hour":{"$date":"%s"},', strftime(as.POSIXct(paste0(hour)), format="%Y-%m-%dT%H:%M:%OSZ", tz = "GMT"))
   hour <- paste0("{", hour ,"}")
