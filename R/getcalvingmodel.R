@@ -24,10 +24,19 @@ getcalvingmodel <- function(hour, username = user, password = pass){
   hour <- paste(unlist(hour), collapse = '", "')
   hour <- sprintf('"hour":{"$date":"%s"},', strftime(as.POSIXct(paste0(hour)), format="%Y-%m-%dT%H:%M:%OSZ", tz = "GMT"))
   hour <- paste0("{", hour ,"}")
-
   if(nchar(hour)==2){}else{
     hour <- substr(hour, 1 , nchar(hour)-2)
     hour <- paste0(hour, "}")}
 
   testing <- calvmod$find(query = hour)
+
+  date <- testing$date[1]
+  date <- paste(unlist(date), collapse = '", "')
+  date <- sprintf('"date":{"$in":["%s"]},', date)
+  date <- paste0("{", date ,"}")
+  if(nchar(date)==2){}else{
+    date <- substr(date, 1 , nchar(date)-2)
+    date <- paste0(date, "}")}
+
+  testing <- calvmod$find(query = date)
 }
