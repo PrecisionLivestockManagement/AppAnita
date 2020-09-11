@@ -39,7 +39,7 @@ getcattle <- function(timestamp = NULL, status = NULL, username = user, password
   if(nchar(filter)==2){}else{
     filter <- substr(filter, 1 , nchar(filter)-2)
     filter <- paste0(filter, "}")}
-  fields <- sprintf('{"RFID":true, "Management":true, "calvingdate":true, "paddock":true, "date":true, "hour":true, "status":true, "_id":false}')
+  fields <- sprintf('{"RFID":true, "management":true, "calvingdate":true, "paddock":true, "date":true, "hour":true, "status":true, "_id":false}')
   info <- cattle$find(query = filter, fields = fields)
 
   return(info)
