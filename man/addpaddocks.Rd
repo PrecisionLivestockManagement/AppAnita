@@ -4,7 +4,7 @@
 \alias{addpaddocks}
 \title{Add paddock data to the AnitaPaddocks collection in the PLMResearch database.}
 \usage{
-addpaddocks(paddname, hectares, cattle, username = NULL, password = NULL)
+addpaddocks(paddname, hectares, cattle, username = user, password = pass)
 }
 \arguments{
 \item{paddname}{the name of the paddock}

@@ -13,7 +13,7 @@
 #' @export
 
 
-getweather <- function(timestamp = NULL, username = NULL, password = NULL){
+getweather <- function(timestamp = NULL, username = user, password = pass){
 
   if(is.null(username)||is.null(password)){
     username = keyring::key_list("DMMongoDB")[1,2]

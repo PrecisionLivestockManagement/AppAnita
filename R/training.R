@@ -1,7 +1,7 @@
 #' Add accelerometer data to the AnitaAccelerometer collection in the PLMResearch database.
 #'
 #' This function adds accelerometer data from Anita's Belmont trial to the MongoDB database.
-#' @name calvingmodel
+#' @name training
 #' @param RFID a list of cattle RFID number/s
 #' @param mtag a list of cattle management tag number/s
 #' @param username username for use with Anita's App
@@ -13,7 +13,7 @@
 #' @export
 
 
-calvingmodel <- function(hour, username = user, password = pass){
+training <- function(username = NULL, password = NULL){
 
   if(is.null(username)||is.null(password)){
     username = keyring::key_list("DMMongoDB")[1,2]
@@ -23,19 +23,5 @@ calvingmodel <- function(hour, username = user, password = pass){
   calvmod <- mongo(collection = "AnitaCalvingModel", db = "PLMResearch", url = pass, verbose = T)
 
   training <- calvmod$find()
-
-  trctrl <- trainControl(method = "repeatedcv", number = 10, repeats = 3, sampling = "up")
-  svm <- train(period ~., data = training[,-c(1:4,69)], method = "svmLinear",
-               trControl = trctrl,
-               preProcess = c("center", "scale"),
-               tuneLength = 10)
-
-  hour <- "2018-10-16 13:00:00"
-  hour <- paste(unlist(hour), collapse = '", "')
-  hour <- sprintf('"hour":{"$date":"%s"},', strftime(as.POSIXct(paste0(hour)), format="%Y-%m-%dT%H:%M:%OSZ", tz = "GMT"))
-  hour <- paste0("{", hour ,"}")
-
-  testing <- calvmod$find(query = hour)
-
-  preds <- data.frame(predict(svm, testing))
+  training <- training[,-c(1:4,69)]
 }

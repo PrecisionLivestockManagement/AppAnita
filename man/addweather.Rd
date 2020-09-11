@@ -11,8 +11,8 @@ addweather(
   humidity,
   THI,
   condition,
-  username = NULL,
-  password = NULL
+  username = user,
+  password = pass
 )
 }
 \arguments{

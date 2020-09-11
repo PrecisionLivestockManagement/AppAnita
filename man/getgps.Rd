@@ -4,7 +4,7 @@
 \alias{getgps}
 \title{Retrieves GPS data from the AnitaGPS collection in the PLMResearch database.}
 \usage{
-getgps(timestamp = NULL, status = NULL, username = NULL, password = NULL)
+getgps(timestamp = NULL, status = NULL, username = user, password = pass)
 }
 \arguments{
 \item{timestamp}{a list of timestamps}

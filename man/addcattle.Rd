@@ -13,8 +13,8 @@ addcattle(
   date,
   hour,
   status,
-  username = NULL,
-  password = NULL
+  username = user,
+  password = pass
 )
 }
 \arguments{

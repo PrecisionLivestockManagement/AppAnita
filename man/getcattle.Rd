@@ -4,7 +4,7 @@
 \alias{getcattle}
 \title{Retrieves cattle data from the AnitaCattle collection in the PLMResearch database.}
 \usage{
-getcattle(timestamp = NULL, status = NULL, username = NULL, password = NULL)
+getcattle(timestamp = NULL, status = NULL, username = user, password = pass)
 }
 \arguments{
 \item{timestamp}{a list of timestamps}

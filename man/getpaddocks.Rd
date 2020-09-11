@@ -4,7 +4,7 @@
 \alias{getpaddocks}
 \title{Retrieves paddock data from the AnitaPaddocks collection in the PLMResearch database.}
 \usage{
-getpaddocks(username = NULL, password = NULL)
+getpaddocks(username = user, password = pass)
 }
 \arguments{
 \item{username}{username for use with Anita's App}

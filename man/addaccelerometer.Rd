@@ -15,8 +15,8 @@ addaccelerometer(
   Y,
   Z,
   status,
-  username = NULL,
-  password = NULL
+  username = user,
+  password = pass
 )
 }
 \arguments{
