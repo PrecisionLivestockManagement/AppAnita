@@ -4,7 +4,7 @@
 \alias{training}
 \title{Add accelerometer data to the AnitaAccelerometer collection in the PLMResearch database.}
 \usage{
-training(username = NULL, password = NULL)
+training(username = user, password = pass)
 }
 \arguments{
 \item{username}{username for use with Anita's App}
