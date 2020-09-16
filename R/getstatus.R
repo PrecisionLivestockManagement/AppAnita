@@ -23,7 +23,7 @@ getstatus <- function(RFID = NULL, username = user, password = pass){
   pass <- sprintf("mongodb://%s:%s@datamuster-shard-00-00-8mplm.mongodb.net:27017,datamuster-shard-00-01-8mplm.mongodb.net:27017,datamuster-shard-00-02-8mplm.mongodb.net:27017/test?ssl=true&replicaSet=DataMuster-shard-0&authSource=admin", username, password)
   status <- mongo(collection = "AnitaStatus", db = "PLMResearch", url = pass, verbose = T)
 
-  if(is.null(status)){
+  if(is.null(RFID)){
     info <- status$find()
   } else {
     RFID <- paste(unlist(RFID), collapse = '", "')
