@@ -4,7 +4,7 @@
 \alias{getstatus}
 \title{Retrieves GPS data from the AnitaGPS collection in the PLMResearch database.}
 \usage{
-getstatus(RFID, username = user, password = pass)
+getstatus(RFID = NULL, username = user, password = pass)
 }
 \arguments{
 \item{username}{username for use with Anita's App}
