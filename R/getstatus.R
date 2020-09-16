@@ -14,7 +14,7 @@
 #' @export
 
 
-getstatus <- function(RFID, username = user, password = pass){
+getstatus <- function(RFID = NULL, username = user, password = pass){
 
   if(is.null(username)||is.null(password)){
     username = keyring::key_list("DMMongoDB")[1,2]
@@ -23,16 +23,17 @@ getstatus <- function(RFID, username = user, password = pass){
   pass <- sprintf("mongodb://%s:%s@datamuster-shard-00-00-8mplm.mongodb.net:27017,datamuster-shard-00-01-8mplm.mongodb.net:27017,datamuster-shard-00-02-8mplm.mongodb.net:27017/test?ssl=true&replicaSet=DataMuster-shard-0&authSource=admin", username, password)
   status <- mongo(collection = "AnitaStatus", db = "PLMResearch", url = pass, verbose = T)
 
-  RFID <- paste(unlist(RFID), collapse = '", "')
-  RFID <- sprintf('"RFID":{"$in":["%s"]},', RFID)
-  RFID <- paste0("{", RFID, "}")
+  if(is.null(status)){
+    info <- status$find()
+  } else {
+    RFID <- paste(unlist(RFID), collapse = '", "')
+    RFID <- sprintf('"RFID":{"$in":["%s"]},', RFID)
+    RFID <- paste0("{", RFID, "}")
 
-  if(nchar(RFID)==2){}else{
-    RFID <- substr(RFID, 1 , nchar(RFID)-2)
-    RFID <- paste0(RFID, "}")}
+    if(nchar(RFID)==2){}else{
+      RFID <- substr(RFID, 1 , nchar(RFID)-2)
+      RFID <- paste0(RFID, "}")}
 
-  info <- RFID$find(query = RFID)
-
-  return(info)
-
+    info <- status$find(query = RFID)
+  }
 }
