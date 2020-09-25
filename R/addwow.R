@@ -16,20 +16,20 @@
 #' @export
 
 
-addwow <- function(RFID, mtag, date, hour, roundedtime, timestamp, weight, status, username = user, password = pass){
+addwow <- function(RFID, mtag, date, time, timestamp, weight, username = user, password = pass){
 
   if(is.null(username)||is.null(password)){
     username = keyring::key_list("DMMongoDB")[1,2]
     password =  keyring::key_get("DMMongoDB", username)}
 
-  pass <- sprintf("mongodb://%s:%s@datamuster-shard-00-00-8mplm.mongodb.net:27017,datamuster-shard-00-01-8mplm.mongodb.net:27017,datamuster-shard-00-02-8mplm.mongodb.net:27017/test?ssl=true&replicaSet=DataMuster-shard-0&authSource=admin", username, password)
-  wow <- mongo(collection = "AnitaWoW", db = "PLMResearch", url = pass, verbose = T)
+  url <- sprintf("mongodb://%s:%s@datamuster-shard-00-00-8mplm.mongodb.net:27017,datamuster-shard-00-01-8mplm.mongodb.net:27017,datamuster-shard-00-02-8mplm.mongodb.net:27017/test?ssl=true&replicaSet=DataMuster-shard-0&authSource=admin", username, password)
+  wower <- mongo(collection = "AnitaWoW", db = "PLMResearch", url = url, verbose = T)
 
   wowdata <- sprintf(
-    '{"RFID":"%s", "management":"%s", "date":"%s", "hour":{"$date":"%s"}, "roundedtime":{"$date":"%s"}, "timestamp":{"$date":"%s"},
-    "weight":%s, "status":"%s"}',
-    RFID, mtag, date, paste0(substr(hour,1,10),"T",substr(hour,12,19),"+1000"), paste0(substr(roundedtime,1,10),"T",substr(roundedtime,12,19),"+1000"),
-    paste0(substr(timestamp,1,10),"T",substr(timestamp,12,19),"+1000"), weight, status)
+    '{"RFID":"%s", "management":"%s", "date":"%s", "time":{"$date":"%s"}, "timestamp":{"$date":"%s"},
+    "weight":%s}',
+    RFID, mtag, date, paste0(substr(time,1,10),"T",substr(time,12,19),"+1000"), paste0(substr(timestamp,1,10),"T",substr(timestamp,12,19),"+1000"),
+    weight)
 
-  wow$insert(wowdata)
+  wower$insert(wowdata)
 }

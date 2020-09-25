@@ -4,7 +4,7 @@
 \alias{getmlresults}
 \title{Add accelerometer data to the AnitaAccelerometer collection in the PLMResearch database.}
 \usage{
-getmlresults(hour, username = user, password = pass)
+getmlresults(time = NULL, username = user, password = pass)
 }
 \arguments{
 \item{username}{username for use with Anita's App}

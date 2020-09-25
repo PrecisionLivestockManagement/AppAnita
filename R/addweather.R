@@ -16,18 +16,18 @@
 #' @export
 
 
-addweather <- function(timestamp, rain, temp, humidity, THI, condition, username = user, password = pass){
+addweather <- function(date, time, rain, temp, humidity, THI, condition, username = user, password = pass){
 
   if(is.null(username)||is.null(password)){
     username = keyring::key_list("DMMongoDB")[1,2]
     password =  keyring::key_get("DMMongoDB", username)}
 
-  pass <- sprintf("mongodb://%s:%s@datamuster-shard-00-00-8mplm.mongodb.net:27017,datamuster-shard-00-01-8mplm.mongodb.net:27017,datamuster-shard-00-02-8mplm.mongodb.net:27017/test?ssl=true&replicaSet=DataMuster-shard-0&authSource=admin", username, password)
-  weather <- mongo(collection = "AnitaWeather", db = "PLMResearch", url = pass, verbose = T)
+  url <- sprintf("mongodb://%s:%s@datamuster-shard-00-00-8mplm.mongodb.net:27017,datamuster-shard-00-01-8mplm.mongodb.net:27017,datamuster-shard-00-02-8mplm.mongodb.net:27017/test?ssl=true&replicaSet=DataMuster-shard-0&authSource=admin", username, password)
+  weath <- mongo(collection = "AnitaWeather", db = "PLMResearch", url = url, verbose = T)
 
   weatherdata <- sprintf(
-    '{"timestamp":{"$date":"%s"}, "rain":%s, "temperature":%s, "humidity":%s, "THI":%s, "condition":"%s"}',
-    paste0(substr(timestamp,1,10),"T",substr(timestamp,12,19),"+1000"), rain, temp, humidity, THI, condition)
+    '{"date":"%s", "time":{"$date":"%s"}, "rain":%s, "temperature":%s, "humidity":%s, "THI":%s, "condition":"%s"}',
+    date, paste0(substr(time,1,10),"T",substr(time,12,19),"+1000"), rain, temp, humidity, THI, condition)
 
-  weather$insert(weatherdata)
+  weath$insert(weatherdata)
 }

@@ -8,11 +8,9 @@ addwow(
   RFID,
   mtag,
   date,
-  hour,
-  roundedtime,
+  time,
   timestamp,
   weight,
-  status,
   username = user,
   password = pass
 )

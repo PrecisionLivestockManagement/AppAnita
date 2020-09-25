@@ -5,7 +5,8 @@
 \title{Add weather data to the AnitaWeather collection in the PLMResearch database.}
 \usage{
 addweather(
-  timestamp,
+  date,
+  time,
   rain,
   temp,
   humidity,
@@ -16,8 +17,6 @@ addweather(
 )
 }
 \arguments{
-\item{timestamp}{a list of timestamps for weather}
-
 \item{rain}{the precipitation}
 
 \item{temp}{the temperature (T)}
@@ -31,6 +30,8 @@ addweather(
 \item{username}{username for use with Anita's App}
 
 \item{password}{password for use with Anita's App}
+
+\item{timestamp}{a list of timestamps for weather}
 }
 \value{
 a message that indicates the data has been successfully added

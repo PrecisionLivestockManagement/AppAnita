@@ -1,7 +1,7 @@
 #' Retrieves weather data from the AnitaWeather collection in the PLMResearch database.
 #'
 #' This function retrieves weather data from Anita's Belmont trial to the MongoDB database.
-#' @name getweather
+#' @name getwow
 #' @param timestamp a list of timestamps
 #' @param username username for use with Anita's App
 #' @param password password for use with Anita's App
@@ -13,17 +13,17 @@
 #' @export
 
 
-getweather <- function(time = NULL, username = user, password = pass){
+getwow <- function(time = NULL, username = user, password = pass){
 
   if(is.null(username)||is.null(password)){
     username = keyring::key_list("DMMongoDB")[1,2]
     password =  keyring::key_get("DMMongoDB", username)}
 
   url <- sprintf("mongodb://%s:%s@datamuster-shard-00-00-8mplm.mongodb.net:27017,datamuster-shard-00-01-8mplm.mongodb.net:27017,datamuster-shard-00-02-8mplm.mongodb.net:27017/test?ssl=true&replicaSet=DataMuster-shard-0&authSource=admin", username, password)
-  weath <- mongo(collection = "AnitaWeather", db = "PLMResearch", url = url, verbose = T)
+  wower <- mongo(collection = "AnitaWoW", db = "PLMResearch", url = url, verbose = T)
 
   if(is.null(time)){
-    info <- weath$find()
+    info <- wower$find()
   } else {
     time <- paste(unlist(time), collapse = '", "')
     time <- sprintf('"time":{"$date":"%s"},', strftime(as.POSIXct(paste0(time)), format="%Y-%m-%dT%H:%M:%OSZ", tz = "GMT"))
@@ -33,6 +33,7 @@ getweather <- function(time = NULL, username = user, password = pass){
     if(nchar(filter)==2){}else{
       filter <- substr(filter, 1 , nchar(filter)-2)
       filter <- paste0(filter, "}")}
-    info <- weath$find(query = filter)
+    info <- wower$find(query = filter)
   }
+
 }

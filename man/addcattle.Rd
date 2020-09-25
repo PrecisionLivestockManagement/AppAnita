@@ -8,11 +8,8 @@ addcattle(
   RFID,
   mtag,
   calvingdate,
-  calving,
+  calvingtype,
   paddock,
-  date,
-  hour,
-  status,
   username = user,
   password = pass
 )
@@ -24,19 +21,19 @@ addcattle(
 
 \item{calvingdate}{a list of cattle calving dates}
 
-\item{calving}{a list of calving styles}
-
 \item{paddock}{a list of cattle paddocks}
+
+\item{username}{username for use with Anita's App}
+
+\item{password}{password for use with Anita's App}
+
+\item{calving}{a list of calving styles}
 
 \item{date}{a list of dates for the data}
 
 \item{hour}{a list of hours for the data}
 
 \item{status}{a list of cow statuses for the given timestamp}
-
-\item{username}{username for use with Anita's App}
-
-\item{password}{password for use with Anita's App}
 }
 \value{
 a message that indicates the data has been successfully added

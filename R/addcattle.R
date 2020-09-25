@@ -18,17 +18,17 @@
 #' @export
 
 
-addcattle <- function(RFID, mtag, calvingdate, calving, paddock, date, hour, status, username = user, password = pass){
+addcattle <- function(RFID, mtag, calvingdate, calvingtype, paddock, username = user, password = pass){
   if(is.null(username)||is.null(password)){
     username = keyring::key_list("DMMongoDB")[1,2]
     password =  keyring::key_get("DMMongoDB", username)}
 
-  pass <- sprintf("mongodb://%s:%s@datamuster-shard-00-00-8mplm.mongodb.net:27017,datamuster-shard-00-01-8mplm.mongodb.net:27017,datamuster-shard-00-02-8mplm.mongodb.net:27017/test?ssl=true&replicaSet=DataMuster-shard-0&authSource=admin", username, password)
-  cattle <- mongo(collection = "AnitaCattle", db = "PLMResearch", url = pass, verbose = T)
+  url <- sprintf("mongodb://%s:%s@datamuster-shard-00-00-8mplm.mongodb.net:27017,datamuster-shard-00-01-8mplm.mongodb.net:27017,datamuster-shard-00-02-8mplm.mongodb.net:27017/test?ssl=true&replicaSet=DataMuster-shard-0&authSource=admin", username, password)
+  cattle <- mongo(collection = "AnitaCattle", db = "PLMResearch", url = url, verbose = T)
 
   cattledata <- sprintf(
-    '{"RFID":"%s", "management":"%s", "calvingdate":"%s", "calving":"%s", "paddock":"%s", "date":"%s", "hour":{"$date":"%s"}, "status":"%s"}',
-    RFID, mtag, calvingdate, calving, paddock, date, paste0(substr(hour,1,10),"T",substr(hour,12,19),"+1000"), status)
+    '{"RFID":"%s", "management":"%s", "calvingdate":"%s", "calvingtype":"%s", "paddock":"%s"}',
+    RFID, mtag, calvingdate, calvingtype, paddock)
 
   cattle$insert(cattledata)
 

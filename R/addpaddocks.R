@@ -19,8 +19,8 @@ addpaddocks <- function(paddname, hectares, cattle, username = user, password = 
     username = keyring::key_list("DMMongoDB")[1,2]
     password =  keyring::key_get("DMMongoDB", username)}
 
-  pass <- sprintf("mongodb://%s:%s@datamuster-shard-00-00-8mplm.mongodb.net:27017,datamuster-shard-00-01-8mplm.mongodb.net:27017,datamuster-shard-00-02-8mplm.mongodb.net:27017/test?ssl=true&replicaSet=DataMuster-shard-0&authSource=admin", username, password)
-  paddock <- mongo(collection = "AnitaPaddocks", db = "PLMResearch", url = pass, verbose = T)
+  url <- sprintf("mongodb://%s:%s@datamuster-shard-00-00-8mplm.mongodb.net:27017,datamuster-shard-00-01-8mplm.mongodb.net:27017,datamuster-shard-00-02-8mplm.mongodb.net:27017/test?ssl=true&replicaSet=DataMuster-shard-0&authSource=admin", username, password)
+  paddock <- mongo(collection = "AnitaPaddocks", db = "PLMResearch", url = url, verbose = T)
 
   paddockdata <- sprintf(
     '{"paddname":"%s", "hectares":%s, "cattle":%s}',

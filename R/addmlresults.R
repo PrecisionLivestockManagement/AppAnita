@@ -19,20 +19,20 @@
 #' @export
 
 
-addgps <- function(RFID, mtag, date, time, mcp, dist, mean.speed, min.speed, max.speed, sd.speed, range.speed, nearest, username = user, password = pass){
+addgps <- function(RFID, mtag, date, time, svm, cart, calvingdate, username = user, password = pass){
 
   if(is.null(username)||is.null(password)){
     username = keyring::key_list("DMMongoDB")[1,2]
     password =  keyring::key_get("DMMongoDB", username)}
 
   url <- sprintf("mongodb://%s:%s@datamuster-shard-00-00-8mplm.mongodb.net:27017,datamuster-shard-00-01-8mplm.mongodb.net:27017,datamuster-shard-00-02-8mplm.mongodb.net:27017/test?ssl=true&replicaSet=DataMuster-shard-0&authSource=admin", username, password)
-  GPSer <- mongo(collection = "AnitaGPS", db = "PLMResearch", url = url, verbose = T)
+  mlres <- mongo(collection = "AnitaMLResults", db = "PLMResearch", url = url, verbose = T)
 
-  GPSdata <- sprintf(
-    '{"RFID":"%s", "management":"%s", "date":"%s", "time":{"$date":"%s"}, "mcp":%s, "dist":%s,
-    "meanspeed":%s, "minspeed":%s, "maxspeed":%s, "sdspeed":%s, "rangespeed":%s, "nearest":%s}',
-    RFID, mtag, date, paste0(substr(time,1,10),"T",substr(time,12,19),"+1000"), mcp, dist,
-    mean.speed, min.speed, max.speed, sd.speed, range.speed, nearest)
+  mlresdata <- sprintf(
+    '{"RFID":"%s", "management":"%s", "date":"%s", "time":{"$date":"%s"},
+    "svm":"%s", "cart":"%s", "calvingdate":"%s"}',
+    RFID, mtag, date, paste0(substr(time,1,10),"T",substr(time,12,19),"+1000"),
+    svm, cart, calvingdate)
 
-  GPSer$insert(GPSdata)
+  mlres$insert(mlresdata)
 }

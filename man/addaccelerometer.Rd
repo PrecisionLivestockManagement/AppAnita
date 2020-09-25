@@ -8,13 +8,17 @@ addaccelerometer(
   RFID,
   mtag,
   date,
-  hour,
-  roundedtime,
-  timestamp,
-  X,
-  Y,
-  Z,
-  status,
+  time,
+  mean.MI,
+  min.MI,
+  max.MI,
+  sd.MI,
+  range.MI,
+  mean.MV,
+  min.MV,
+  max.MV,
+  sd.MV,
+  range.MV,
   username = user,
   password = pass
 )
@@ -25,6 +29,10 @@ addaccelerometer(
 \item{mtag}{a list of cattle management tag number/s}
 
 \item{date}{a list of cattle dates}
+
+\item{username}{username for use with Anita's App}
+
+\item{password}{password for use with Anita's App}
 
 \item{hour}{a list of cattle hours}
 
@@ -39,10 +47,6 @@ addaccelerometer(
 \item{Z}{the Z axes}
 
 \item{status}{the status}
-
-\item{username}{username for use with Anita's App}
-
-\item{password}{password for use with Anita's App}
 }
 \value{
 a message that indicates the data has been successfully added
