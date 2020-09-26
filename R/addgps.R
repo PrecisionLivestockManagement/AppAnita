@@ -19,7 +19,7 @@
 #' @export
 
 
-addgps <- function(RFID, mtag, date, time, mcp, dist, mean.speed, min.speed, max.speed, sd.speed, range.speed, nearest, username = user, password = pass){
+addgps <- function(RFID, mtag, date, time, lat, long, mcp, dist, mean.speed, min.speed, max.speed, sd.speed, range.speed, nearest, username = user, password = pass){
 
   if(is.null(username)||is.null(password)){
     username = keyring::key_list("DMMongoDB")[1,2]
@@ -29,9 +29,10 @@ addgps <- function(RFID, mtag, date, time, mcp, dist, mean.speed, min.speed, max
   GPSer <- mongo(collection = "AnitaGPS", db = "PLMResearch", url = url, verbose = T)
 
   GPSdata <- sprintf(
-    '{"RFID":"%s", "management":"%s", "date":"%s", "time":{"$date":"%s"}, "mcp":%s, "dist":%s,
+    '{"RFID":"%s", "management":"%s", "date":"%s", "time":{"$date":"%s"}, "latitude":%s, "longitude":%s,
+    "mcp":%s, "dist":%s,
     "meanspeed":%s, "minspeed":%s, "maxspeed":%s, "sdspeed":%s, "rangespeed":%s, "nearest":%s}',
-    RFID, mtag, date, paste0(substr(time,1,10),"T",substr(time,12,19),"+1000"), mcp, dist,
+    RFID, mtag, date, paste0(substr(time,1,10),"T",substr(time,12,19),"+1000"), lat, long, mcp, dist,
     mean.speed, min.speed, max.speed, sd.speed, range.speed, nearest)
 
   GPSer$insert(GPSdata)

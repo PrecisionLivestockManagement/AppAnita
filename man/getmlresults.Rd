@@ -7,6 +7,8 @@
 getmlresults(time = NULL, username = user, password = pass)
 }
 \arguments{
+\item{time}{the time}
+
 \item{username}{username for use with Anita's App}
 
 \item{password}{password for use with Anita's App}

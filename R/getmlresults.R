@@ -2,7 +2,7 @@
 #'
 #' This function adds accelerometer data from Anita's Belmont trial to the MongoDB database.
 #' @name getmlresults
-#' @param time
+#' @param time the time
 #' @param username username for use with Anita's App
 #' @param password password for use with Anita's App
 #' @return a message that indicates the data has been successfully added
