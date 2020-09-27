@@ -25,7 +25,7 @@ updatestatus <- function(RFID, status = NULL, notification = NULL, username = us
   for (i in 1:length(RFID)){
     RFIDS <- sprintf('{"RFID":"%s"}', RFID[i])
     if(is.null(status)){
-      IDI <- sprintf('{"$set":{"notification":"%s"}}', notification[i])
+      IDI <- sprintf('{"$set":{"notifications":"%s"}}', notification[i])
       stat$update(RFIDS, IDI)
     }
     if(is.null(notification)){
