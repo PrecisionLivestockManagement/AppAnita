@@ -21,6 +21,7 @@
 
 addgps <- function(RFID, mtag, date, time, svm, cart, calvingdate, username = user, password = pass){
 
+
   if(is.null(username)||is.null(password)){
     username = keyring::key_list("DMMongoDB")[1,2]
     password =  keyring::key_get("DMMongoDB", username)}
