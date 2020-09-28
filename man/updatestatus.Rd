@@ -8,6 +8,7 @@ updatestatus(
   RFID,
   status = NULL,
   notification = NULL,
+  date = NULL,
   username = user,
   password = pass
 )

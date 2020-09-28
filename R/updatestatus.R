@@ -13,7 +13,7 @@
 #' @export
 
 
-updatestatus <- function(RFID, status = NULL, notification = NULL, username = user, password = pass){
+updatestatus <- function(RFID, status = NULL, notification = NULL, date = NULL, username = user, password = pass){
 
   if(is.null(username)||is.null(password)){
     username = keyring::key_list("DMMongoDB")[1,2]
@@ -30,6 +30,10 @@ updatestatus <- function(RFID, status = NULL, notification = NULL, username = us
     }
     if(is.null(notification)){
       IDI <- sprintf('{"$set":{"status":"%s"}}', status[i])
+      stat$update(RFIDS, IDI)
+    }
+    if(is.null(date)){
+      IDI <- sprintf('{"$set":{"calvingdate":{"$date":"%s"}}}', paste0(substr(date[i],1,10),"T","00:00:00","+1000"))
       stat$update(RFIDS, IDI)
     }
   }
