@@ -2,7 +2,7 @@
 #'
 #' This function retrieves weather data from Anita's Belmont trial to the MongoDB database.
 #' @name updatestatus
-#' @param timestamp a list of timestamps
+#' @param status the status
 #' @param username username for use with Anita's App
 #' @param password password for use with Anita's App
 #' @return returns the paddock spatial information

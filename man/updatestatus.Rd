@@ -13,11 +13,11 @@ updatestatus(
 )
 }
 \arguments{
+\item{status}{the status}
+
 \item{username}{username for use with Anita's App}
 
 \item{password}{password for use with Anita's App}
-
-\item{timestamp}{a list of timestamps}
 }
 \value{
 returns the paddock spatial information
