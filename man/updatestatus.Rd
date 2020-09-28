@@ -4,7 +4,13 @@
 \alias{updatestatus}
 \title{Retrieves weather data from the AnitaWeather collection in the PLMResearch database.}
 \usage{
-updatestatus(RFID, status, username = user, password = pass)
+updatestatus(
+  RFID,
+  status = NULL,
+  notification = NULL,
+  username = user,
+  password = pass
+)
 }
 \arguments{
 \item{username}{username for use with Anita's App}
