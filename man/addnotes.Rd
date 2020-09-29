@@ -12,7 +12,7 @@ addnotes(
   calfwt = NULL,
   udder = NULL,
   front = NULL,
-  back = NULL,
+  rear = NULL,
   cowbcs = NULL,
   notes = NULL,
   username = user,
