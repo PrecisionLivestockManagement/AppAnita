@@ -12,6 +12,7 @@
 
 
 addnotes <- function(RFID, calfID = NULL, calfsex = NULL, calfvigour = NULL, calfwt = NULL, udder = NULL, front = NULL, rear = NULL, cowbcs = NULL, notes = NULL, username = user, password = pass){
+
   if(is.null(username)||is.null(password)){
     username = keyring::key_list("DMMongoDB")[1,2]
     password =  keyring::key_get("DMMongoDB", username)}
