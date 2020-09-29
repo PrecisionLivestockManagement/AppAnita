@@ -25,20 +25,6 @@ addnotes(
 \item{username}{username for use with Anita's App}
 
 \item{password}{password for use with Anita's App}
-
-\item{mtag}{a list of cattle management tags}
-
-\item{calvingdate}{a list of cattle calving dates}
-
-\item{calving}{a list of calving styles}
-
-\item{paddock}{a list of cattle paddocks}
-
-\item{date}{a list of dates for the data}
-
-\item{hour}{a list of hours for the data}
-
-\item{status}{a list of cow statuses for the given timestamp}
 }
 \value{
 a message that indicates the data has been successfully added

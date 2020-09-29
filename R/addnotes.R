@@ -3,13 +3,6 @@
 #' This function adds cattle data from Anita's Belmont trial to the MongoDB database.
 #' @name addnotes
 #' @param RFID a list of cattle RFIDs
-#' @param mtag a list of cattle management tags
-#' @param calvingdate a list of cattle calving dates
-#' @param calving a list of calving styles
-#' @param paddock a list of cattle paddocks
-#' @param date a list of dates for the data
-#' @param hour a list of hours for the data
-#' @param status a list of cow statuses for the given timestamp
 #' @param username username for use with Anita's App
 #' @param password password for use with Anita's App
 #' @return a message that indicates the data has been successfully added
