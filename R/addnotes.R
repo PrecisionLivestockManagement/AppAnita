@@ -41,7 +41,7 @@ addnotes <- function(RFID, calfID = NULL, calfsex = NULL, calfvigour = NULL, cal
       comments$update(RFIDS, IDI)
     }
     if(!is.null(calfwt)){
-      IDI <- sprintf('{"$set":{"calfwt":%s}}', calfwt[i])
+      IDI <- sprintf('{"$set":{"calfwt":"%s"}}', calfwt[i])
       comments$update(RFIDS, IDI)
     }
     if(!is.null(udder)){
