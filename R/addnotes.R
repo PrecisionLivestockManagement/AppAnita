@@ -30,39 +30,39 @@ addnotes <- function(RFID, calfID = NULL, calfsex = NULL, calfvigour = NULL, cal
     RFIDS <- sprintf('{"RFID":"%s"}', RFID[i])
     if(!is.null(calfID)){
       IDI <- sprintf('{"$set":{"calfID":"%s"}}', calfID[i])
-      stat$update(RFIDS, IDI)
+      comments$update(RFIDS, IDI)
     }
     if(!is.null(calfsex)){
       IDI <- sprintf('{"$set":{"calfsex":"%s"}}', calfsex[i])
-      stat$update(RFIDS, IDI)
+      comments$update(RFIDS, IDI)
     }
     if(!is.null(calfvigour)){
       IDI <- sprintf('{"$set":{"calfvigour":"%s"}}', calfvigour[i])
-      stat$update(RFIDS, IDI)
+      comments$update(RFIDS, IDI)
     }
     if(!is.null(calfwt)){
-      IDI <- sprintf('{"$set":{"calfwt":"%s"}}', calfwt[i])
-      stat$update(RFIDS, IDI)
+      IDI <- sprintf('{"$set":{"calfwt":%s}}', calfwt[i])
+      comments$update(RFIDS, IDI)
     }
     if(!is.null(udder)){
       IDI <- sprintf('{"$set":{"udder":"%s"}}', udder[i])
-      stat$update(RFIDS, IDI)
+      comments$update(RFIDS, IDI)
     }
     if(!is.null(front)){
       IDI <- sprintf('{"$set":{"front":"%s"}}', front[i])
-      stat$update(RFIDS, IDI)
+      comments$update(RFIDS, IDI)
     }
     if(!is.null(rear)){
       IDI <- sprintf('{"$set":{"rear":"%s"}}', rear[i])
-      stat$update(RFIDS, IDI)
+      comments$update(RFIDS, IDI)
     }
     if(!is.null(cowbcs)){
       IDI <- sprintf('{"$set":{"cowbcs":"%s"}}', cowbcs[i])
-      stat$update(RFIDS, IDI)
+      comments$update(RFIDS, IDI)
     }
     if(!is.null(notes)){
       IDI <- sprintf('{"$set":{"notes":"%s"}}', notes[i])
-      stat$update(RFIDS, IDI)
+      comments$update(RFIDS, IDI)
     }
   }
 }
