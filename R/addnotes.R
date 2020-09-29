@@ -18,7 +18,7 @@
 #' @export
 
 
-addnotes <- function(RFID, calfID = NULL, calfsex = NULL, calfvigour = NULL, calfwt = NULL, udder = NULL, front = NULL, back = NULL, cowbcs = NULL, notes = NULL, username = user, password = pass){
+addnotes <- function(RFID, calfID = NULL, calfsex = NULL, calfvigour = NULL, calfwt = NULL, udder = NULL, front = NULL, rear = NULL, cowbcs = NULL, notes = NULL, username = user, password = pass){
   if(is.null(username)||is.null(password)){
     username = keyring::key_list("DMMongoDB")[1,2]
     password =  keyring::key_get("DMMongoDB", username)}
@@ -52,8 +52,8 @@ addnotes <- function(RFID, calfID = NULL, calfsex = NULL, calfvigour = NULL, cal
       IDI <- sprintf('{"$set":{"front":"%s"}}', front[i])
       stat$update(RFIDS, IDI)
     }
-    if(!is.null(back)){
-      IDI <- sprintf('{"$set":{"back":"%s"}}', back[i])
+    if(!is.null(rear)){
+      IDI <- sprintf('{"$set":{"rear":"%s"}}', rear[i])
       stat$update(RFIDS, IDI)
     }
     if(!is.null(cowbcs)){
