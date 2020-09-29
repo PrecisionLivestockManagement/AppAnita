@@ -1,7 +1,7 @@
 #' Retrieves weather data from the AnitaWeather collection in the PLMResearch database.
 #'
 #' This function retrieves weather data from Anita's Belmont trial to the MongoDB database.
-#' @name getwow
+#' @name getusers
 #' @param timestamp a list of timestamps
 #' @param username username for use with Anita's App
 #' @param password password for use with Anita's App
@@ -13,7 +13,7 @@
 #' @export
 
 
-getwow <- function(email, username = user, password = pass){
+getusers <- function(email, username = user, password = pass){
 
   if(is.null(username)||is.null(password)){
     username = keyring::key_list("DMMongoDB")[1,2]
