@@ -22,8 +22,12 @@ updateincorrectalert <- function(RFID, date, username = user, password = pass){
   url <- sprintf("mongodb://%s:%s@datamuster-shard-00-00-8mplm.mongodb.net:27017,datamuster-shard-00-01-8mplm.mongodb.net:27017,datamuster-shard-00-02-8mplm.mongodb.net:27017/test?ssl=true&replicaSet=DataMuster-shard-0&authSource=admin", username, password)
   stat <- mongo(collection = "AnitaMLResults", db = "PLMResearch", url = url, verbose = T)
 
-  for (i in 1:length(RFID)){
-    RFIDS <- sprintf('{"RFID":"%s", "date":"%s"}', RFID[i], date[i])
+  filter <- sprintf('{"RFID":"%s", "date":"%s"}', RFID, date)
+
+  data <- stat$find(query = filter)
+
+  for (i in 1:nrow(data)){
+    RFIDS <- sprintf('{"RFID":"%s", "time":{"$date":"%s"}}', data$RFID[i], strftime(as.POSIXct(paste0(data$time[i])), format="%Y-%m-%dT%H:%M:%OSZ", tz = "GMT"))
     IDI <- sprintf('{"$set":{"incorrectalert":"%s"}}', "pregnant")
     stat$update(RFIDS, IDI)
   }
