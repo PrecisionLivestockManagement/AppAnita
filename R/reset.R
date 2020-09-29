@@ -39,11 +39,13 @@ reset <- function(username = user, password = pass){
   mlresdata <- mlres$find()
   mlresdata <- mlresdata %>%
     filter(incorrectalert == "pregnant")
-  mlresdata$incorrectalert <- ""
-  for (i in 1:nrow(mlresdata)){
-    RFIDS <- sprintf('{"RFID":"%s", "time":{"$date":"%s"}}', mlresdata$RFID[i], strftime(as.POSIXct(paste0(mlresdata$time[i])), format="%Y-%m-%dT%H:%M:%OSZ", tz = "GMT"))
-    IDI <- sprintf('{"$set":{"incorrectalert":"%s"}}', mlresdata$incorrectalert[i])
-    mlres$update(RFIDS, IDI)
+  if(nrow(mlresdata) > 0){
+    mlresdata$incorrectalert <- ""
+    for (i in 1:nrow(mlresdata)){
+      RFIDS <- sprintf('{"RFID":"%s", "time":{"$date":"%s"}}', mlresdata$RFID[i], strftime(as.POSIXct(paste0(mlresdata$time[i])), format="%Y-%m-%dT%H:%M:%OSZ", tz = "GMT"))
+      IDI <- sprintf('{"$set":{"incorrectalert":"%s"}}', mlresdata$incorrectalert[i])
+      mlres$update(RFIDS, IDI)
+      }
   }
 
   # Status
