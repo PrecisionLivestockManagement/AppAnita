@@ -3,6 +3,7 @@
 export(addaccelerometer)
 export(addcattle)
 export(addgps)
+export(addnotes)
 export(addpaddocks)
 export(addweather)
 export(addwow)

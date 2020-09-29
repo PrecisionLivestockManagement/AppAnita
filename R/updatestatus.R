@@ -24,16 +24,16 @@ updatestatus <- function(RFID, status = NULL, notification = NULL, date = NULL, 
 
   for (i in 1:length(RFID)){
     RFIDS <- sprintf('{"RFID":"%s"}', RFID[i])
-    if(is.null(status)){
-      IDI <- sprintf('{"$set":{"notifications":"%s"}}', notification[i])
-      stat$update(RFIDS, IDI)
-    }
-    if(is.null(notification)){
+    if(!is.null(status)){
       IDI <- sprintf('{"$set":{"status":"%s"}}', status[i])
       stat$update(RFIDS, IDI)
     }
-    if(is.null(date)){
-      IDI <- sprintf('{"$set":{"calvingdate":{"$date":"%s"}}}', paste0(substr(date[i],1,10),"T","00:00:00","+1000"))
+    if(!is.null(notification)){
+      IDI <- sprintf('{"$set":{"notifications":"%s"}}', notification[i])
+      stat$update(RFIDS, IDI)
+    }
+    if(!is.null(date)){
+      IDI <- sprintf('{"$set":{"calvingdate":"%s"}}', date[i])
       stat$update(RFIDS, IDI)
     }
   }
